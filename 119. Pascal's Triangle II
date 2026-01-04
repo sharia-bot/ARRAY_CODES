@@ -1,0 +1,26 @@
+My code 
+T.C - O(N^2)
+S.C- O(ROWiNDEX);
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+         vector<int>result(1,1);// row 0 -> size 1,el 1
+         for(int i =1;i<=rowIndex ;i++){
+              vector<int>temp = result;
+              result.resize(temp.size() + 1);
+              for(int j = 0;j<temp.size()+1;j++){
+              if(j-1>=0 && j <temp.size()){
+                result[j]= temp[j-1] + temp[j] ;
+              }
+              else
+                  result[j] = 1;
+              }   
+         }
+    return result;     
+    }
+ BUT shortcut Formula this problem 
+val = val * (rowIndex - i + 1) / i;
+where val is previous value 
+and intital val = 1;
+C(n,k)=C(n,k−1)×(n−k+1)/k;
+​
