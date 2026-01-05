@@ -49,3 +49,29 @@ public:
     return candidate;    
     }
 };
+Using Bit Manipulation
+T.C - O(N)
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+
+        int n = nums.size();
+        int half_n = n/2;
+        int candidate = 0;
+
+        for(int i =0;i<32;i++){
+            int One_bit_count = 0;
+
+             for(auto & num : nums){
+                int ith_bit = (num >> i) & 1;
+
+                if(ith_bit == 1)
+                  One_bit_count++;
+             }
+             if(One_bit_count>half_n){
+               candidate |= (1<<i);
+             }
+        }
+    return candidate;    
+    }
+};
