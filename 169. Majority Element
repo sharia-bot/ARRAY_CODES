@@ -1,3 +1,6 @@
+Approach-1 using sorting 
+T.C - O(NLOGN)
+S.C- O(1)
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -17,11 +20,32 @@ public:
             }
             else
              count = 1;
-        }
-
-       
-      
+        }             
     return 0;    
         
+    }
+};
+Approach -2 
+Using Booye Moyer Majority Vote Algorithtm
+T.C - O(N)
+S.C- O(1)
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count    = 0;
+        int candidate= 0;
+
+        for(int& num : nums){
+            if(count == 0){
+                candidate = num;
+                count++;
+            }
+            else if(candidate == num){
+                count++;
+            }
+            else
+              count--;
+        } 
+    return candidate;    
     }
 };
