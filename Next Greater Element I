@@ -1,0 +1,41 @@
+T.C - O(N + M)
+S.C - O(N)
+where N is size nums2,M is size nums1
+class Solution {
+public:
+    unordered_map<int,int>NGE;//NGE next greater element
+    void Next_Greater(vector<int>&nums){
+         int n = nums.size();
+         stack<int>st;
+
+         for(int i=n-1;i>=0;i--){
+            if(st.empty()){
+                NGE[nums[i]] = -1;             
+            }
+            else{
+                while(!st.empty() && st.top() < nums[i]){
+                    st.pop();
+                }
+                NGE[nums[i]] = st.empty() ? -1 : st.top();
+            }
+            st.push(nums[i]);
+
+         }
+
+    return;    
+    }
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+       
+        // find next greater elment of nums2
+        // store in map {num , NGE}
+        Next_Greater(nums2);
+
+        int n = nums1.size();
+        vector<int>result;
+
+        for(int& num : nums1){
+            result.push_back(NGE[num]);
+        }
+    return result;    
+    }
+};
