@@ -11,9 +11,6 @@ public:
          ll take_one_step = cost[i] + solve(i+1,n,cost);
          ll take_two_step = cost[i] + solve(i+2,n,cost);   
 
-         // dont take 
-        // ll skip = solve(i+1,n,cost);
-
          return t[i] =  min(take_one_step,take_two_step);       
     }
     int minCostClimbingStairs(vector<int>& cost) {
