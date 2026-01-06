@@ -1,0 +1,76 @@
+Approach-1: Brute Force
+T.C - O(M*N)
+S.C- O(M+N)
+class Solution {
+public:
+    vector<int> luckyNumbers(vector<vector<int>>& matrix) {
+           int m = matrix.size();
+           int n = matrix[0].size();
+
+           vector<int>row_el(m,INT_MAX);
+           vector<int>col_el(n,INT_MIN);
+
+           for(int i =0;i<m;i++){
+              int min_el = INT_MAX;
+               for(int j =0;j<n;j++){ 
+                 min_el = min(min_el,matrix[i][j]);
+               }
+                row_el[i] = min_el;
+           }
+          for(int j=0;j<n;j++){
+             int max_el = INT_MIN;
+             for(int i=0;i<m;i++){
+                  max_el = max(max_el,matrix[i][j]);
+             }
+             col_el[j] = max_el;    
+          }    
+        vector<int>result;
+
+        for(int i=0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                int num = matrix[i][j];
+
+                if((row_el[i] == num) && (num == col_el[j])){
+                    result.push_back(num);
+                }
+            }
+        }   
+    return result;    
+    }
+};
+Approach-2 Greedy 
+T.C - O(N*M)
+S.C - O(1)
+we didn't observe a key observation that there can be at most one lucky number in the matrix.
+class Solution {
+public:
+    vector<int> luckyNumbers(vector<vector<int>>& matrix) {
+           int m = matrix.size();
+           int n = matrix[0].size();
+
+           
+           int rowminMax = INT_MIN;
+
+           for(int i =0;i<m;i++){
+                int rowmin    = INT_MAX;
+               for(int j =0;j<n;j++){ 
+                 rowmin = min(rowmin,matrix[i][j]);
+               }
+               rowminMax = max(rowminMax,rowmin);
+                
+           }
+          int colMaxMin = INT_MAX;
+          for(int j=0;j<n;j++){
+             int colMax = INT_MIN;
+             for(int i=0;i<m;i++){
+                  colMax = max(colMax,matrix[i][j]);
+             }
+            colMaxMin = min(colMaxMin,colMax);    
+          }    
+
+      if(rowminMax == colMaxMin )
+         return {colMaxMin};
+
+    return {};    
+    }
+};
