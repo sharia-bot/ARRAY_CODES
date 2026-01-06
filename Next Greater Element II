@@ -1,0 +1,55 @@
+class Solution {
+public:
+   deque<int>q;
+     void Fill_deq(vector<int>& nums){
+    
+     q.push_front(nums[0]);
+     for(int& num : nums){
+        if(!q.empty() && q.back() < num){
+          q.push_back(num);
+        
+        } 
+     }
+    for(int& x : q) cout<<x<<" ";
+    cout<<endl;
+     }
+      vector<int>getNSR(vector<int>& arr,int n){
+         vector<int>result(n);
+         stack<int>st;
+
+         for(int i=n-1;i>=0;i--){
+            if(st.empty()){
+                while(!q.empty() && q.front() <= arr[i]){
+                    q.pop_front();
+                }
+                result[i] = q.empty() ? -1 : q.front();
+            }
+            else{
+                while(!st.empty() && st.top() <= arr[i]){
+                    st.pop();
+                }
+                if(st.empty()){
+                     while(!q.empty() && q.front() <= arr[i]){
+                    q.pop_front();
+                }
+                result[i] = q.empty() ? -1 : q.front();
+                }
+                else{
+                    result[i] = st.top();
+                }
+            }
+            st.push(arr[i]);
+         }
+           for(int x: result) cout<<x<<" "; 
+           cout<<endl;
+    return  result;    
+    }
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
+         Fill_deq(nums);
+      
+        vector<int> NSR = getNSR(nums,n);
+  
+    return NSR;    
+    }
+};
