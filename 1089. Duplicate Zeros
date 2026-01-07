@@ -1,3 +1,8 @@
+Intuition:
+if num = 0 push two 0 in que
+else just push num in q
+so that if its 0 ,q front is zero and and arr next is will be 0 
+which is store in q
 class Solution {
 public:
     void duplicateZeros(vector<int>& arr) {
